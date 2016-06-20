@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Carte</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            jQuery(function($){
+                $('.map').append('<div class="overlay">').append('<div class="tooltip">Salut!</div>');
+                $('.map .tooltip').hide();
+                //Data region
+                var zones=[
+                    {name:'En haut à gauche',slug:'top-left'},  
+                    {name:'En haut à droite',slug:'top-right'},  
+                    {name:'En bas à gauche',slug:'down-left'},  
+                    {name:'En bas à droite',slug:'down-right'}  
+                ];
+                //Tooltip qui suit la souris
+                $(document).mousemove(function(e){
+                    $('.map .tooltip').css({
+                        top: e.pageY-$('.map .toopltip').height()-25,
+                        left: e.pageX-$('.map .toopltip').width()/20-15
+                    });
+                });
+                
+                //On met les liens sur les aréa
+                $('.map area').each(function(){
+                    var index=$(this).index();
+                    $(this).attr('href','http://google.com/?q='+zones[index].slug);
+                });
+                
+                //On passe sur une region
+                $('.map area').mouseover(function(){
+                    var index=$(this).index();
+                    var left=-index*400-400;
+                    $('.map .tooltip').html(zones[index].name).stop().fadeTo(500,1);
+                    $('.map .overlay').css({
+                        backgroundPosition: left+"px 0px"
+                    });
+                });
+                //Onsort de la map
+                $('.map').mouseout(function(){
+                    $('.map .overlay').css({
+                        backgroundPosition: "400px" 
+                    });
+                    $('.map .tooltip').stop().fadeTo(300,0);
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="map">
+            <img src="void.png" width="400" height="400" usemap="#Map"/>
+            <map name="Map">
+                <area shape="rect" coords="0,0,200,200" alt="noir" href="https://www.google.fr">
+                <area shape="rect" coords="200,0,400,200" alt="jaune" href="https://fr.yahoo.com">
+                <area shape="rect" coords="0,200,200,400" alt="vert" href="https://www.amazon.fr">
+                <area shape="rect" coords="200,200,400,400" alt="bleu" href="http://www.fnac.com">
+            </map>
+        </div>
+    </body>
+</html>
