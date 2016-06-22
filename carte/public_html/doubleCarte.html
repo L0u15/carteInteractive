@@ -6,29 +6,24 @@
         <link rel="stylesheet" type="text/css" href="style_carte.css">
         <script src="https://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
         <script type="text/javascript">
-            jQuery(function ($) {
-                $valeur = $("#choix_categorie").val();
-                $('.form-select').change(function () {
-                    $valeur = $("#choix_categorie").val();
-                    if ($valeur === "enfant") {
-                        $('#map_adultes').css("display", "none");
-                        $('#map_enfant').css("display", "block");
-                    } else {
-                        $('#map_enfant').css("display", "none");
-                        $('#map_adultes').css("display", "block");
-                    }
-
-                });
-                if ($valeur === "enfant") {
+            function afficheMap(map) {
+                if (map === "enfant") {
                     $('#map_adultes').css("display", "none");
                     $('#map_enfant').css("display", "block");
                 } else {
                     $('#map_enfant').css("display", "none");
                     $('#map_adultes').css("display", "block");
                 }
+            }
+            jQuery(function ($) {
+                $valeur = $("#choix_categorie").val();
+                $('.form-select').change(function () {
+                    $valeur = $("#choix_categorie").val();
+                    afficheMap($valeur);
+                });
+                afficheMap($valeur);
             });
         </script>
-
     </head>
     <body>
         <div>
@@ -36,18 +31,20 @@
                 Les structures de soin auprès desquelles vous pouvez vous adresser sont définies en fonction de votre lieu d'habitation.
             </p>
         </div>
-        <div>
+        <div class="choix">
             <!--Selection de la carte : DEBUT -->
             <select name="categorie" class="form-select" id="choix_categorie">
-                <option value="adulte" selected="selected">Adultes</option>
+                <option value="adulte" selected="selected">Adulte</option>
                 <option value="enfant">Enfant</option>
             </select>
             <!--Selection de la carte : FIN -->
+            <p>Cliquez sur le Centre Médico-Psychologique (CMP) de votre secteur</p>
         </div>
+        <!--Carte Adulte : DEBUT -->
         <div class="map" id="map_adultes">
             <img src="void.png" usemap="#Map_Adultes"/>
             <map name="Map_Adultes">
-                <area shape="rect" coords="141,80,252,130" alt="saint-omer" href="www.google.fr">
+                <area shape="rect" coords="141,80,252,130" alt="saint-omer" href="https://www.google.fr/#safe=off&q=saint-omer">
                 <area shape="rect" coords="226,185,334,231" alt="aire-sur-la-Lys" href="#">
                 <area shape="rect" coords="324,251,392,289" alt="lillers" href="#">
                 <area shape="rect" coords="312,305,376,351" alt="auchel" href="#">
@@ -58,6 +55,8 @@
                 <area shape="rect" coords="208,423,316,481" alt="saint-pol-sur-ternoise" href="#">
             </map>
         </div>
+        <!--Carte Adulte : FIN -->
+        <!--Carte Enfant : DEBUT -->
         <div class="map" id="map_enfant">
             <img src="void.png" usemap="#Map_Enfant"/>
             <map name="Map_Enfant">
@@ -70,5 +69,6 @@
                 <area shape="rect" coords="438,337,515,380" alt="noeux-les-mines" href="#">
             </map>
         </div>
+        <!--Carte Enfant : FIN -->
     </body>
 </html>

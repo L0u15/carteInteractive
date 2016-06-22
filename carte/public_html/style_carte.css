@@ -27,5 +27,27 @@
     top: 0;
     left: 0;
     z-index: 2;
-     
+
+}
+.map{
+    margin-left: auto;
+    margin-right: auto;
+}
+.choix{
+    width: 300px;
+    text-align: center;
+    background-color: #bdc3c7;
+    margin-bottom: 20px;
+}
+.choix p{
+    padding: 10px 10px 10px 10px;
+}
+.form-select{
+    width: 200px;
+    margin-top: 10px;
+}
+body{
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
