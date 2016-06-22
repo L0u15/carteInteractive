@@ -1,0 +1,31 @@
+#map_enfant{
+    width: 600px;
+    height: 514px;
+    background: url(carte_enfant.png) left top no-repeat;
+    position: relative;
+    display: none;
+}
+#map_adultes{
+    width: 600px;
+    height: 632px;
+    background: url(carte_adulte.png) left top no-repeat;
+    position: relative;
+    display: block;
+}
+#map_enfant img{
+    width: 600px;
+    height: 514px;
+    background: url(void.png) left top no-repeat;   
+}
+#map_adultes img{
+    width: 600px;
+    height: 632px;
+    background: url(void.png) left top no-repeat;   
+}
+.map img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+     
+}
