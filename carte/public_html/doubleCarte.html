@@ -7,6 +7,7 @@
         <script src="https://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
         <script type="text/javascript">
             jQuery(function ($) {
+                $valeur = $("#choix_categorie").val();
                 $('.form-select').change(function () {
                     $valeur = $("#choix_categorie").val();
                     if ($valeur === "enfant") {
@@ -18,11 +19,23 @@
                     }
 
                 });
+                if ($valeur === "enfant") {
+                    $('#map_adultes').css("display", "none");
+                    $('#map_enfant').css("display", "block");
+                } else {
+                    $('#map_enfant').css("display", "none");
+                    $('#map_adultes').css("display", "block");
+                }
             });
         </script>
 
     </head>
     <body>
+        <div>
+            <p>
+                Les structures de soin auprès desquelles vous pouvez vous adresser sont définies en fonction de votre lieu d'habitation.
+            </p>
+        </div>
         <div>
             <!--Selection de la carte : DEBUT -->
             <select name="categorie" class="form-select" id="choix_categorie">
