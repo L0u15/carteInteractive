@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Concevoir facilement une shadow box, jQuery</title>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <style>
+            /*Style general de la page*/
+            body {font:14px verdana, sans-serif;background:#000000;color:#C0C0C0;font-weight:bold;}
+            /*Styles relatifs à la shadow box*/
+            /*Style du masque recouvrant la page au chargement de la shadow box*/
+            #page {position:absolute;left:0;top:0;z-index:9000;background-color:#000;display:none;}
+            /*Positionnement et dimensions de la shadow box*/
+            #boxes .window {position:absolute;left:0;top:0;width:440px;height:200px;display:none;z-index:9999;padding:20px;}
+            #boxes #dialog {width:375px;height:203px;padding:10px;color:#00008B;border:3px solid #fff;background-color:#C0C0C0;}
+            /*Style du bouton*/
+            .shadowbox{position:absolute;left:50%;top:50%;width:100px;}
+        </style>
+        <script type="text/javascript">
+            //Utilisé pour éviter le conflit avec d’autres plugins qui seraient liés
+            //à la page
+            jQuery.noConflict();
+
+            jQuery(document).ready(function () {
+                //Evénement lié au clic du bouton de la page
+                jQuery(".shadowbox").click(function () {
+                    //Récupération des dimensions de la page
+                    var xHeight = jQuery(document).height();
+                    var xWidth = jQuery(window).width();
+                    //Dimensionnement du masque recouvrant la page
+                    jQuery("#page").css({"width": xWidth, "height": xHeight});
+                    //Apparition du masque
+                    jQuery("#page").fadeIn();
+                    //Attribution à celui-ci d’une transparence de
+                    //façon à laisser la page légèrement visible 
+                    jQuery("#page").fadeTo("fast", 0.6);
+                    var xH = jQuery(window).height();
+                    var xW = jQuery(window).width();
+                    //Centrage de la shadow box
+                    jQuery("#dialog").css("top", xH / 2 - jQuery("#dialog").height() / 2);
+                    jQuery("#dialog").css("left", xW / 2 - jQuery("#dialog").width() / 2);
+                    //Apparition de la shadow box
+                    jQuery("#dialog").fadeIn();
+
+                });
+                //Fermeture de la shadow box via le bouton qu’elle contient
+                jQuery(".window .close").click(function () {
+                    jQuery("#page").hide();
+                    jQuery(".window").hide();
+                });
+            });
+        </script>
+    </head>
+    <body>
+
+        <!--Bouton de la page-->
+        <input type="button" value="Shadow box" class="shadowbox" />
+        <!--Div incluant la box et le masque-->
+        <div id="boxes"/>
+        <!--La box-->
+        <div id="dialog" class="window"/>
+    <center> 
+        Exemple de ShadowBox 
+
+        Celle-ci peut vous servir dans de nombreuses situations comme
+        formulaire de contact ou d"authentification.
+
+        <input type="button" class="close" value="Quitter" />
+    </center>
+</div>
+<!--Le masque-->
+<div id="page">
+</div>
+</div>
+</body>
+</html>
